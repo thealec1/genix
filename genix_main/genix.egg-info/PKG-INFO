@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: genix
+Version: 0.1.0
+Summary: GUI library for Pygame
+Home-page: https://github.com/thealec1/python_genix
+Author: Alec Reilly
+Author-email: areilly14@icloud.com
+License: MIT
+Description: Genix is a new pygame GUI library.  It aims to be very readable, and straightforward when creating UI elementslike inventories or main menus for games.
+Keywords: pygame,interface,gui,ui
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Operating System :: Microsoft :: Windows :: Windows 10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
