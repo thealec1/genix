@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/46400863/88863507-075b1080-d1d1-11ea-9b06-480b054ce1d3.png)
 
-# genix
+# Genix
 Genix is a GUI library written in Python and designed for pygame.  It aims to make it very easy for pygame devs to make cool looking UI components like inventories, health bars, or main menus.
 
 # Wiki
