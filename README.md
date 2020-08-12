@@ -5,7 +5,7 @@ Genix is a GUI library written in Python and designed for pygame.  It aims to ma
 
 # Wiki
 
-The Wiki contains documentation for all of the important features, and an introductory guide.
+The Wiki contains documentation for all of the important features, and an introductory guide:
 
 [Genix Wiki](https://github.com/thealec1/genix/wiki/01.-Home)
 
