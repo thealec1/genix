@@ -29,3 +29,15 @@ pip install genix -U
 Genix Showcase Video
 
 # Creations with Genix
+
+# Slot-Based Inventory
+
+![genix_example1](https://user-images.githubusercontent.com/46400863/90972306-e773ef80-e4e5-11ea-93f2-5f586d66b6db.PNG)
+
+# Pause Menu
+
+![genix_example2](https://user-images.githubusercontent.com/46400863/90972317-007ca080-e4e6-11ea-8090-ef492723c3ff.PNG)
+
+# Game HUD (Hotbar, Health Bar, etc)
+
+![genix_example3](https://user-images.githubusercontent.com/46400863/90972328-29049a80-e4e6-11ea-8e75-fa2ee0e18b72.PNG)
