@@ -11,3 +11,13 @@ Date: [July 25th, 2020]
 - First release! :)
 
 --------------------------
+Version 0.1.1
+Date: [August 23rd, 2020]
+
+- set_alpha now works for sprites
+
+- Horizontal constraint now works for containers
+
+- The Height of UIGrids didn't properly fit the size of the container
+
+---------------------------
