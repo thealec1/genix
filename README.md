@@ -26,7 +26,7 @@ pip install genix -U
 
 # Genix Video
 
-Genix Showcase Video
+[Genix Showcase Video](https://www.reddit.com/r/pygame/comments/ifc8bq/genix_a_new_pygame_gui_library/)
 
 # Creations with Genix
 
