@@ -7,4 +7,5 @@ class Horizontal(Constraint):
         self.x_offset = x_offset
 
     def update_constraint(self, ui_element=None):
-        ui_element.rect.x += ui_element.parent_screen.rect.width * self.x_offset
+        # ui_element.rect.x += ui_element.parent_screen.rect.width * self.x_offset
+        ui_element.add_x(ui_element.parent_screen.rect.width * self.x_offset)
