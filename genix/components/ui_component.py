@@ -7,6 +7,7 @@ class UIComponent(pg.sprite.Sprite):
     """
     The most basic ui element from which every other element derives from
     """
+
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
 
@@ -15,12 +16,17 @@ class UIComponent(pg.sprite.Sprite):
 
         self.original_image = pg.Surface((10, 10))
         self.image = self.original_image
+
         self.rect = self.image.get_rect()
+
         self.parent_screen = UIMain.win
         self.constraints = []
-        self.alpha_value = 0
+
+        self.alpha_value = None
+        self.surface = None
         self.layout = None
         self.tooltip = None
+
         self.is_clicking = False
         self.hover = False
         self.can_move = False
@@ -62,7 +68,7 @@ class UIComponent(pg.sprite.Sprite):
             for constraint in self.constraints:
                 constraint.update_constraint(self)
 
-            if self.alpha_value != 0:
+            if self.alpha_value is not None:
                 self.set_alpha(self.alpha_value)
 
         if self.tick_event is not None:
@@ -148,12 +154,14 @@ class UIComponent(pg.sprite.Sprite):
         :param surface: The pygame surface to draw
         :return: None
         """
+
+        self.image = pg.Surface((0, 0))
+
         if surface is not None:
             self.original_image = surface.convert_alpha()
-            self.image = self.original_image
+            self.image = self.original_image.copy()
             self.rect = self.image.get_rect()
-            return True
-        self.image = pg.Surface((0, 0))
+            self.surface = surface
 
     def set_alpha(self, alpha_value):
         """
@@ -162,11 +170,15 @@ class UIComponent(pg.sprite.Sprite):
         :param alpha_value: 0 being fully transparent, 255 being completely visible
         :return: None
         """
-        self.image.set_alpha(alpha_value)
+
         self.alpha_value = alpha_value
-        tmp = pg.Surface(self.rect.size, pg.SRCALPHA)
-        tmp.fill((255, 255, 255, alpha_value))
-        self.image.blit(tmp, (0, 0), special_flags=pg.BLEND_RGB_MULT)
+        self.image.set_alpha(alpha_value)
+
+        if self.surface is not None:
+            tmp = pg.Surface(self.rect.size, pg.SRCALPHA)
+            tmp.fill((255, 255, 255, alpha_value))
+            self.image = pg.transform.smoothscale(self.original_image, self.rect.size)
+            self.image.blit(tmp, (0, 0), special_flags=pg.BLEND_RGBA_MULT)
 
     def set_parent(self, parent):
         """
@@ -231,8 +243,10 @@ class UIComponent(pg.sprite.Sprite):
         """
         if self.hovering_event is not None:
             self.hovering_event()
+
         if self.hover_event is not None and not self.hover:
             self.hover_event()
+
         self.hover = True
 
     def on_unhover(self):
