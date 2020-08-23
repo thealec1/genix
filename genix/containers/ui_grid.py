@@ -49,7 +49,7 @@ class UIGrid(genix.UIContainer):
             self.rect.width += component.rect.width
 
         self.rect.width += ((self.rows-1) * ((parent.rect.width * self.x_spacing)-component.rect.width))
-        self.rect.height += ((self.columns-1) * ((parent.rect.height * self.y_spacing)-component.rect.height))
+        self.rect.height += ((self.columns-1) * ((parent.rect.width * self.y_spacing)-component.rect.height))
 
         self.image = pg.transform.smoothscale(self.original_image, self.rect.size)
 
