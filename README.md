@@ -3,6 +3,8 @@
 # Genix
 Genix is a GUI library written in Python and designed for pygame.  It aims to make it very easy for pygame devs to make cool looking UI components like inventories, health bars, or main menus.
 
+[![PyPI version](https://badge.fury.io/py/genix.svg)](https://badge.fury.io/py/genix) [![Downloads](https://pepy.tech/badge/genix)](https://pepy.tech/project/genix)
+
 # Wiki
 
 The Wiki contains documentation for all of the important features, and an introductory guide:
@@ -21,8 +23,6 @@ pip install genix
 ```
 pip install genix -U
 ```
-
-[![PyPI version](https://badge.fury.io/py/genix.svg)](https://badge.fury.io/py/genix)
 
 # Genix Video
 
