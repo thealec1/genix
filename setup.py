@@ -11,12 +11,12 @@ classifiers = [
 
 setup(
     name="genix",
-    version="0.1.1",
+    version="0.1.2",
     description="GUI library for Pygame",
     long_description="Genix is a new pygame GUI library.  It aims to be very "
                      "readable, and straightforward when creating UI elements"
                      "like inventories or main menus for games.",
-    url='https://github.com/thealec1/python_genix',
+    url='https://github.com/thealec1/genix',
     author="Alec Reilly",
     author_email="areilly14@icloud.com",
     license='MIT',
