@@ -30,7 +30,7 @@ class UIContainer(genix.UIComponent):
         """
         self.rect.x += transform_value
 
-        for component in self.__get_components():
+        for component in self.components:
             component.add_x(transform_value)
 
     def add_y(self, transform_value=0):
@@ -42,8 +42,19 @@ class UIContainer(genix.UIComponent):
         """
         self.rect.y += transform_value
 
-        for component in self.__get_components():
+        for component in self.components:
             component.add_y(transform_value)
+
+    def set_visible(self, visibility=False, affect_children=False):
+
+        if visibility:
+            genix.UIMain.visible_ui_elements.add(self, layer=self.layer)
+        else:
+            genix.UIMain.visible_ui_elements.remove(self)
+
+        if affect_children:
+            for component in self.components:
+                component.set_visible(visibility)
 
     def __get_components(self):
         """
@@ -53,8 +64,12 @@ class UIContainer(genix.UIComponent):
         """
         build_components = []
 
-        for ui_component in self.components:
-            build_components.append(ui_component)
+        for ui_element in self.components:
+            if isinstance(ui_element, genix.UIContainer):
+                pass
+            else:
+                pass
+            # build_components.append(ui_component)
             # if hasattr(ui_component, 'components'):
             #     self.__breakdown_component(ui_component.components)
 
@@ -67,9 +82,9 @@ class UIContainer(genix.UIComponent):
         :param component: The list that contains the ui components
         :return: None
         """
-        for ui_component in component:
-            if hasattr(ui_component, 'components'):
-                self.__breakdown_component(ui_component)
-            else:
-                component.append(ui_component)
-                break
+        # for ui_component in component:
+        #     if hasattr(ui_component, 'components'):
+        #         self.__breakdown_component(ui_component)
+        #     else:
+        #         component.append(ui_component)
+        #         break
