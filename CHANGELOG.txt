@@ -2,16 +2,20 @@
   Genix 
 ==========
 
+===============================================
+Found a bug or have a suggestion?  Feel free to contact me either through: 
+	Reddit: https://www.reddit.com/user/a1ecrei11y
+	Email: areilly14@icloud.com
+===============================================
 
-
--------------------------
+--------------------------
 Version: 0.1.0
 Date: [July 25th, 2020]
 
 - First release! :)
 
 --------------------------
-Version 0.1.1
+Version: 0.1.1
 Date: [August 23rd, 2020]
 
 - set_alpha now works for sprites
@@ -20,4 +24,35 @@ Date: [August 23rd, 2020]
 
 - The Height of UIGrids didn't properly fit the size of the container
 
----------------------------
+--------------------------
+Version: 0.1.2
+Date: [August 27th, 2020]
+
+****************
+A Genix example has been added to the source code: genix_backpack_example.
+The example features examples of using text, grids, the centered connstraints, component events, and tooltips.
+****************
+
+- The order of constraints added to a component no longer matters.
+
+- Setting the visibility of a ui_component doesn't change their position in the sprite group when they are made visible again.
+
+- Added a "Centered" constraint.  You no longer have to use both "CenterX()" and "CenterY()" for constraining a component to it's parent's center.
+
+- Added more genix colours.  They are all listed in the new documentation.
+
+- You can now set tooltips on UI Components using set_tooltip(component)
+
+- set_visible can how hide all of a UI Container's children
+
+	* Call with set_visible(visibility=False, affect_children=True)
+
+	* If this is called as set_visible(visibility=False, affect_children=False) only the UI Container background itself will be hidden.
+
+- Text components no longer have to be updated everytime the text changes.
+
+- Setting the alpha of text now works.
+
+- Text components now change scale based on screen size automatically without the need to add the RelativeWidth/RelativeHeight constraints yourself.
+
+--------------------------
