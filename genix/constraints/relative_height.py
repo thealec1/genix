@@ -1,5 +1,4 @@
 from genix.constraints.constraint import Constraint
-from genix.components.ui_text import UIText
 from genix.containers.ui_grid import UIGrid
 import pygame as pg
 
@@ -7,6 +6,7 @@ import pygame as pg
 class RelativeHeight(Constraint):
 
     def __init__(self, height_percent):
+        super().__init__()
         self.height_percent = height_percent
 
     def update_constraint(self, ui_element=None):
