@@ -4,7 +4,7 @@ try:
 
 except ModuleNotFoundError as e:
     print(e)
-    print("Genix Error: Couldn't open win32con and win32gui.  Some features may not work!")
+    print("Genix Error: Couldn't open win32con and win32gui.  Some features may not work!  Try using pywin32 package.")
 
 import pygame as pg
 
