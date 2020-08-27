@@ -10,7 +10,7 @@ class UIMain:
 
     win = None
     ui_elements = pg.sprite.Group()
-    visible_ui_elements = pg.sprite.Group()
+    visible_ui_elements = pg.sprite.LayeredUpdates()
     is_client_clicking = False
 
     def __init__(self, main_window):
