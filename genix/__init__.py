@@ -5,6 +5,7 @@ from genix.containers.ui_container import UIContainer
 from genix.containers.ui_select_box import UISelectBox
 from genix.constraints.center_x import CenterX
 from genix.constraints.center_y import CenterY
+from genix.constraints.centered import Centered
 from genix.constraints.relative_width import RelativeWidth
 from genix.constraints.relative_height import RelativeHeight
 from genix.constraints.vertical import Vertical
