@@ -30,7 +30,7 @@ Date: [August 27th, 2020]
 
 ****************
 A Genix example has been added to the source code: genix_backpack_example.
-The example features examples of using text, grids, the centered connstraints, component events, and tooltips.
+The example features examples of using text, grids, the centered constraint, component events, and tooltips.
 ****************
 
 - The order of constraints added to a component no longer matters.
