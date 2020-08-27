@@ -1,8 +1,11 @@
 class Constraint:
+    def __init__(self):
+        self.priority = 0
 
     def update_constraint(self, ui_element=None):
         """
-        Each constraint subclass is called through this method
+        Every constraint subclass shadows this method
+
         :param ui_element: The UI element to modify
         :return:
         """
