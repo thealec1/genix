@@ -7,11 +7,15 @@ class UIComponent(pg.sprite.Sprite):
     """
     The most basic ui element from which every other element derives from
     """
+    position = 1
 
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
 
-        UIMain.visible_ui_elements.add(self)
+        UIComponent.position += 1
+        self.layer = UIComponent.position
+
+        UIMain.visible_ui_elements.add(self, layer=self.layer)
         UIMain.ui_elements.add(self)
 
         self.original_image = pg.Surface((10, 10))
@@ -26,6 +30,7 @@ class UIComponent(pg.sprite.Sprite):
         self.surface = None
         self.layout = None
         self.tooltip = None
+        self.is_tooltip = False
 
         self.is_clicking = False
         self.hover = False
@@ -61,19 +66,23 @@ class UIComponent(pg.sprite.Sprite):
             if isinstance(self, genix.UIGrid):
                 self.update_layout()
 
+            return
+
         if mode == "constrain":
-
-            self.rect.x, self.rect.y = self.parent_screen.rect.x, self.parent_screen.rect.y
-
-            for constraint in self.constraints:
-                constraint.update_constraint(self)
-
-            if self.alpha_value is not None:
-                self.set_alpha(self.alpha_value)
+            self.text_constraints()
+            self.update_constraints()
+            self.update_alpha()
+            return
 
         if self.tick_event is not None:
             self.tick_event()
 
+        if not self.is_tooltip:
+            self.check_click()
+
+            self.check_collision()
+
+    def check_click(self):
         if not UIMain.is_client_clicking:
             self.is_clicking = False
 
@@ -81,6 +90,7 @@ class UIComponent(pg.sprite.Sprite):
             if self.can_move:
                 self.drag_drop()
 
+    def check_collision(self):
         if self.rect.collidepoint(pg.mouse.get_pos()) and self in UIMain.visible_ui_elements:
             self.on_hover()
 
@@ -88,6 +98,43 @@ class UIComponent(pg.sprite.Sprite):
             if self.hover:
                 self.on_unhover()
             self.hover = False
+
+    def text_constraints(self):
+        """
+        Before locational and size constraints are updated text constraint values are updated
+        :return:
+        """
+
+        if isinstance(self, genix.UIText):
+            if isinstance(self.parent_screen, genix.UIGrid):
+                text_parent = self.parent_screen.parent_screen
+                self.set_parent_sizes(text_parent.rect.width, text_parent.rect.height)
+            else:
+                self.set_parent_sizes(self.parent_screen.rect.width, self.parent_screen.rect.height)
+
+    def update_constraints(self):
+        """
+        Sorts the constraints based on priority, and updates
+        location and width constraints
+
+        :return:
+        """
+
+        self.rect.x, self.rect.y = self.parent_screen.rect.x, self.parent_screen.rect.y
+
+        self.constraints.sort(key=lambda element: element.priority)
+
+        for constraint in self.constraints:
+            constraint.update_constraint(self)
+
+    def update_alpha(self):
+        """
+        Updates the alpha value of a ui component
+
+        :return:
+        """
+        if self.alpha_value is not None:
+            self.set_alpha(self.alpha_value)
 
     def add_x(self, transform_value=0):
         """
@@ -174,7 +221,8 @@ class UIComponent(pg.sprite.Sprite):
         self.alpha_value = alpha_value
         self.image.set_alpha(alpha_value)
 
-        if self.surface is not None:
+        if self.surface is not None or isinstance(self, genix.UIText):
+
             tmp = pg.Surface(self.rect.size, pg.SRCALPHA)
             tmp.fill((255, 255, 255, alpha_value))
             self.image = pg.transform.smoothscale(self.original_image, self.rect.size)
@@ -199,18 +247,20 @@ class UIComponent(pg.sprite.Sprite):
         :return: None
         """
         if visibility:
-            UIMain.visible_ui_elements.add(self)
+            UIMain.visible_ui_elements.add(self, layer=self.layer)
         else:
             UIMain.visible_ui_elements.remove(self)
 
-    def set_tooltip(self, tooltip_component=None):
+    def set_tooltip(self, component=None):
         """
         When this component is hovered over, a ui_element is displayed
 
-        :param tooltip_component: A UIComponent or container that acts as the tooltip
+        :param component: A UIComponent or container that acts as the tooltip
         :return: None
         """
-        self.tooltip = tooltip_component
+        component.is_tooltip = True
+        component.set_visible(visibility=False, affect_children=True)
+        self.tooltip = component
 
     def on_click(self):
         """
@@ -241,6 +291,10 @@ class UIComponent(pg.sprite.Sprite):
 
         :return: None
         """
+        if self.tooltip is not None:
+            self.tooltip.set_visible(visibility=True, affect_children=True)
+            self.tooltip.drag_drop()
+
         if self.hovering_event is not None:
             self.hovering_event()
 
@@ -255,5 +309,8 @@ class UIComponent(pg.sprite.Sprite):
 
         :return: None
         """
+        if self.tooltip is not None:
+            self.tooltip.set_visible(visibility=False, affect_children=True)
+
         if self.unhover_event is not None:
             self.unhover_event()
